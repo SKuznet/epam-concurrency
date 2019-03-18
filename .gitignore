@@ -3,6 +3,11 @@
 
 # Log file
 *.log
+*.idea
+out
+target
+
+.gradle
 
 # BlueJ files
 *.ctxt
