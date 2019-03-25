@@ -16,4 +16,5 @@ public class Main {
         Thread.sleep(3000);
         System.out.println("Final balance in ATM is " + atm1.getBalance(Account.account));
     }
+
 }
