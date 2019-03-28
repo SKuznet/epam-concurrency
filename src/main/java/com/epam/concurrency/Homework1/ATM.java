@@ -11,7 +11,7 @@ public class ATM implements Runnable {
         this.atmNumber = atmNumber;
     }
 
-    public String getMoney(BigDecimal amount, BankAccount bankAccount) throws InterruptedException {
+    public synchronized String getMoney(BigDecimal amount, BankAccount bankAccount) throws InterruptedException {
 
         if (moneyAtATM.compareTo(amount) > 0) {
             try {

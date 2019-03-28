@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class BankAccount {
 
-    public BigDecimal getAccountMoney() {
+    public synchronized BigDecimal getAccountMoney() {
         return accountMoney;
     }
 
