@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Application {
 
-    private static long WITHDRAW_AMOUNT = 250;
+    private static final long WITHDRAW_AMOUNT = 250L;
 
     public static void main(String[] args) throws InterruptedException {
         Atm atm = new Atm();
