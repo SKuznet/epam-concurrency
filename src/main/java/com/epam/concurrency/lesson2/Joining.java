@@ -6,7 +6,7 @@ public class Joining {
         Sleeper stark = new Sleeper("stark", 1500);
 
         Joiner klop = new Joiner("klop", tony);
-        Joiner blop = new Joiner("blop", stark);
+        Joiner blob = new Joiner("blob", stark);
         stark.interrupt();
     }
 }
