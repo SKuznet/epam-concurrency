@@ -10,9 +10,8 @@ public class CouponHolder {
     private static AtomicIntegerArray coupons = new AtomicIntegerArray(100);
 
     public static Integer giveNextCoupon() {
-        Integer currentCoupon = 0;
         synchronized (CouponHolder.class) {
-            currentCoupon = couponsCounter.get();
+            Integer currentCoupon = couponsCounter.get();
             checkCoupon(currentCoupon);
             coupons.set(currentCoupon, couponsCounter.getAndAdd(1));
             System.err.println("Giving next coupon: " + currentCoupon);

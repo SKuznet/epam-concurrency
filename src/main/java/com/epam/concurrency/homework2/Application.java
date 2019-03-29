@@ -9,7 +9,6 @@ public class Application {
 
     public static void main(String[] args) throws InterruptedException {
         CouponMachine couponMachine = new CouponMachine();
-        SluggishCouponMachine sluggishCouponMachine = new SluggishCouponMachine();
         ExecutorService executorService = Executors.newFixedThreadPool(11);
 
         for (int i = 0; i < 10; i++) {
@@ -20,6 +19,8 @@ public class Application {
         System.err.println("We are fine.");
 
         System.err.println("That's a weird looking machine... Let's try to get a donut coupon from it.");
+        CouponMachine sluggishCouponMachine = new CouponMachine();
+        sluggishCouponMachine.setSluggish(true);
         Future<Integer> result = executorService.submit(sluggishCouponMachine);
         executorService.shutdown();
 
