@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class DonnutAutomat implements Callable<Coupon> {
 
-    static private AtomicInteger count = new AtomicInteger(0);
     private int automatId;
 
     public DonnutAutomat(int automatId) {
@@ -15,8 +14,9 @@ public class DonnutAutomat implements Callable<Coupon> {
 
     @Override
     public Coupon call() throws InterruptedException {
-            count.getAndAdd(1);
-            return new Coupon(count);
+
+            return new Coupon(CouponCreatingService.getCouponNumber());
+
     }
 
     public int getAutomatId() {
@@ -26,4 +26,5 @@ public class DonnutAutomat implements Callable<Coupon> {
     public void setAutomatId(int automatId) {
         this.automatId = automatId;
     }
+
 }

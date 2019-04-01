@@ -1,20 +1,18 @@
 package com.epam.concurrency.Homework2;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Coupon {
 
-    private AtomicInteger number;
+    private int number;
 
-    public Coupon(AtomicInteger number) {
+    public Coupon(int number) {
         this.number = number;
     }
 
-    public AtomicInteger getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(AtomicInteger number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 }
