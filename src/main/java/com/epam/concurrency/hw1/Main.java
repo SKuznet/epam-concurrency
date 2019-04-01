@@ -8,6 +8,7 @@ import com.epam.concurrency.hw1.bank.SafeAtm;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 
 /**
@@ -33,6 +34,9 @@ public class Main {
         Person Даша = new Person(account);
         Person Катя = new Person(account);
         Person Оля = new Person(account);
+
+        CompletableFuture future = CompletableFuture.allOf(null);
+        future.get
 
         List<Person> people = new ArrayList<>();
         people.add(Маша);
