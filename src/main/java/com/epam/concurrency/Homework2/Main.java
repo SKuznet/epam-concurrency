@@ -10,22 +10,11 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        List<DonnutAutomat> donnutAutomats = new ArrayList<>();
-
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
         for (int i = 0; i < 10; i++) {
-            donnutAutomats.add(new DonnutAutomat());
+            TimeUnit.MILLISECONDS.sleep(100);
+            Thread thread = new Thread(new Client(i, new DonnutAutomat(i)));
+            thread.start();
         }
 
-        while(true) {
-            donnutAutomats.forEach(a -> {
-                new Client(a.call()).run();
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-        }
     }
 }

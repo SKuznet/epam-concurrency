@@ -1,25 +1,45 @@
 package com.epam.concurrency.Homework2;
 
-import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 public class Client implements Runnable{
 
-    private Coupon coupon;
+    private int clientId;
 
-    public Client(Coupon coupon) {
-        this.coupon = coupon;
+    private DonnutAutomat donnutAutomat;
+
+    public Client(int clientId, DonnutAutomat donnutAutomat) {
+        this.donnutAutomat = donnutAutomat;
+        this.clientId = clientId;
     }
 
-    public Coupon getCoupon() {
-        return coupon;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setCoupon(Coupon coupon) {
-        this.coupon = coupon;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     @Override
     public void run() {
-        System.out.println("client get coupon:" + coupon.getNumber());
+
+            while (true) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Coupon coupon = null;
+                try {
+                    coupon = donnutAutomat.call();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("client: " + clientId + " get coupon: " + coupon.getNumber() + " from donnutMachine: " + donnutAutomat.getAutomatId());
+            }
+        }
+
     }
-}
+
