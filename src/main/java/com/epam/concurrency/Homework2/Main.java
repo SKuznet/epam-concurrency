@@ -8,9 +8,8 @@ public class Main {
 
         for (int i = 0; i < 10; i++) {
             TimeUnit.MILLISECONDS.sleep(100);
-            Thread thread = new Thread(new Client(i, new DonnutAutomat(i)));
+            Thread thread = new Thread(new Client(i, new DonutMachine(i)));
             thread.start();
         }
-
     }
 }
