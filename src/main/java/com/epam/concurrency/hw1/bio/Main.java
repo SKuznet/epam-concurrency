@@ -3,55 +3,63 @@ package com.epam.concurrency.hw1.bio;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static int M = 13;
+    public static int N = 4_000_000;
 
-        int N = 100;
-        int M = 2;
+    public static void main(String[] args) throws IOException {
 
         String string = getString(N);
         System.out.println(string);
         StringReader reader = new StringReader(string);
 
-        Long[] window = new Long[M / 31 + 1];
+        long[] window = new long[M / 31 + 1];
         int lastSectionSize = (M - (M / 31) * 31) * 2;
 
-        ArrayList list = new ArrayList();
-        HashMap<Long[], List<Integer>> map = new HashMap<>();
+        long[] fill = fill(reader, window, M);
+        WindowWrapper firstWindow = new WindowWrapper(fill);
 
-        fill(reader, window, M);
-        ArrayList<Integer> integerArrayList = new ArrayList<>();
-        integerArrayList.add(0);
-        map.put(window, integerArrayList);
-//        list.add(Arrays.copyOf(window, window.length));
-//        printWindow(window, 0, lastSectionSize);
+        TreeMap<WindowWrapper, List<Integer>> map = new TreeMap<>();
 
+        List<Integer> positions = new ArrayList<>();
+        positions.add(0);
+        map.put(firstWindow, positions);
+        System.out.println(printWindow(window, 0, lastSectionSize));
+
+        long[] put = copy(window);
         for (int j = 1; j < N - M; j++) {
-            Long[] put = put(reader.read(), window, lastSectionSize);
-            if (map.containsKey(put)) {
-                List<Integer> integers = map.get(put);
-                integers.add(j);
-            } else {
-                List<Integer> subList = new ArrayList<>();
-                subList.add(j);
-                map.put(window, subList);
+            if (j % 1000000 == 0) {
+                System.out.println(j);
             }
-//            list.add(put);
-//            printWindow(put, j, lastSectionSize);
+            put = put(reader.read(), put, lastSectionSize);
+            WindowWrapper windowWrapper = new WindowWrapper(put);
+            if (!map.containsKey(windowWrapper)) {
+                positions = new ArrayList<>();
+                positions.add(j);
+                map.put(windowWrapper, positions);
+            } else {
+                positions = map.get(windowWrapper);
+                positions.add(j);
+            }
         }
 
-        System.out.println(map);
+        map.entrySet().stream()
+                .forEach(entry -> {
+                    if (entry.getValue().size() > 1) {
+                        System.out.println(entry);
+                    }
+        });
 
     }
 
-    private static Long[] fill(StringReader reader, Long[] window, int freeSpace) throws IOException {
+    private static long[] fill(StringReader reader, long[] window, int freeSpace) throws IOException {
 
         for (int i = 0; i < window.length; i++) {
             long section = Long.MAX_VALUE;
@@ -66,39 +74,42 @@ public class Main {
         return window;
     }
 
-    private static Long[] put(int read, Long[] window, int lastSectionSize) {
-        if (window.length == 1) {
-            long firstSection = window[0];
+    private static long[] put(int read, long[] window, int lastSectionSize) {
+        long[] result = copy(window);
+        if (result.length == 1) {
+            long firstSection = result[0];
             firstSection = firstSection << 2;
             firstSection = addCodedLetter(read, firstSection);
-            window[0] = firstSection;
+            long filler = Long.MAX_VALUE << lastSectionSize;
+            firstSection = firstSection | filler;
+            result[0] = firstSection;
         } else {
             long bitsToMove = Long.MAX_VALUE;
 
-            for (int i = window.length - 1; i >= 0; i--) {
-                if (i == window.length - 1) {
-                    long section = window[i];
+            for (int i = result.length - 1; i >= 0; i--) {
+                if (i == result.length - 1) {
+                    long section = result[i];
                     bitsToMove = (section << (64 - lastSectionSize)) >>> 62;
                     section = section << 2;
                     section = addCodedLetter(read, section);
                     long filler = Long.MAX_VALUE << lastSectionSize;
                     section = section | filler;
-                    window[i] = section;
+                    result[i] = section;
                 } else {
-                    long section = window[i];
+                    long section = result[i];
                     section = section << 2;
                     section |= bitsToMove;
                     bitsToMove = section >>> 62;
                     long filler = Long.MAX_VALUE << 62;
                     section = section | filler;
-                    window[i] = section;
+                    result[i] = section;
                 }
             }
         }
-        return window;
+        return result;
     }
 
-    private static void printWindow(Long[] window, int indent, int lastSectionSize) {
+    public static String printWindow(long[] window, int indent, int lastSectionSize) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < indent; i++) {
             stringBuilder.append("_");
@@ -127,7 +138,7 @@ public class Main {
             }
             stringBuilder.append(sb.reverse());
         }
-        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
     }
 
     private static long addCodedLetter(int read, long section) {
@@ -149,8 +160,17 @@ public class Main {
 
     private static String getString(int count ) {
         return IntStream.range(0, count)
+                .parallel()
             .mapToObj(i -> "ACGT".charAt(new Random().nextInt(4)))
             .map(String::valueOf)
             .collect(Collectors.joining());
+    }
+
+    private static long[] copy(long[] window) {
+        long[] mewArr = new long[window.length];
+        for (int i = 0; i < window.length; i++) {
+            mewArr[i] = window[i];
+        }
+        return mewArr;
     }
 }
