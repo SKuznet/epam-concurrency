@@ -2,14 +2,16 @@ package com.epam.concurrency.Homework2;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.epam.concurrency.Homework2.CouponMachine.donutMachine;
+
 public class Client implements Runnable {
 
     private int clientId;
-    private DonutMachine donutMachine;
+    private CouponMachine couponMachine;
     private Coupon coupon;
 
-    public Client(int clientId, DonutMachine donutMachine) {
-        this.donutMachine = donutMachine;
+    public Client(int clientId, CouponMachine couponMachine) {
+        this.couponMachine = couponMachine;
         this.clientId = clientId;
     }
 
@@ -17,16 +19,22 @@ public class Client implements Runnable {
     public void run() {
         while (true) {
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
-                coupon = donutMachine.call();
-                System.out.println("client: " + clientId +
-                        " get coupon: " + coupon.getNumber() +
-                        " from donnutMachine: " + donutMachine.getMachineId());
+                coupon = couponMachine.createCoupon();
+
+                System.err.println("client: " + clientId +
+                        " get coupon: " + coupon.getNumber());
+
+                Donut donut = donutMachine.getDonut(coupon);
+                System.err.println(("client: " + clientId +
+                        " get donut: " + donut.getDonutId()));
+                if (coupon.getNumber() > 20) {
+                    break;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }
+
 

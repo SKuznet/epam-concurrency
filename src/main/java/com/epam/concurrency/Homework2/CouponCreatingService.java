@@ -6,8 +6,8 @@ public class CouponCreatingService {
 
     private static AtomicInteger lastNumber = new AtomicInteger(0);
 
-    public static int getCouponNumber() {
-            return lastNumber.getAndAdd(1);
+    public synchronized static int getCouponNumber() {
+        return lastNumber.getAndAdd(1);
     }
 
 }

@@ -1,23 +1,20 @@
 package com.epam.concurrency.Homework2;
 
-import java.util.concurrent.Callable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+public class DonutMachine {
 
-public class DonutMachine implements Callable<Coupon> {
+    private volatile Map<Coupon, Donut> mapOfDonut = new HashMap<>();
 
-    private int machineId;
-
-    public DonutMachine(int machineId) {
-        this.machineId = machineId;
+    public synchronized Donut getDonut(Coupon coupon) {
+        return mapOfDonut.get(coupon);
     }
 
-    @Override
-    public Coupon call() throws InterruptedException {
-        return new Coupon(CouponCreatingService.getCouponNumber());
+    public synchronized void createDonut(Coupon coupon) throws InterruptedException {
+        System.err.println("Donut " + coupon.getNumber() + " making time...");
+        TimeUnit.MILLISECONDS.sleep(1);
+        mapOfDonut.put(coupon, new Donut(coupon.getNumber()));
     }
-
-    public int getMachineId() {
-        return machineId;
-    }
-
 }

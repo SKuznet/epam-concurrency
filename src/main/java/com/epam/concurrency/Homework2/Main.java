@@ -4,11 +4,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         for (int i = 0; i < 10; i++) {
-            TimeUnit.MILLISECONDS.sleep(100);
-            Thread thread = new Thread(new Client(i, new DonutMachine(i)));
+            //TimeUnit.MILLISECONDS.sleep(100);
+            Thread thread = new Thread(new Client(i, new CouponMachine(i)));
             thread.start();
         }
     }
