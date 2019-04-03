@@ -1,6 +1,7 @@
 package com.epam.concurrency.lesson2;
 
 public class Joiner extends Thread {
+
     private Sleeper sleeper;
 
     public Joiner(String name, Sleeper sleeper) {
@@ -11,12 +12,13 @@ public class Joiner extends Thread {
 
     @Override
     public void run() {
-        try {
-            sleeper.join();
-        } catch (InterruptedException e) {
-            System.err.println("interrupted");
-        }
+            try {
+                sleeper.join();
+            } catch (InterruptedException e) {
+                System.err.println("interrupted");
+            }
 
         System.out.println(getName() + " join is end!");
     }
+
 }

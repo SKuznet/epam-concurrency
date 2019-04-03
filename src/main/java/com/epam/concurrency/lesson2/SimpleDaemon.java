@@ -2,10 +2,11 @@ package com.epam.concurrency.lesson2;
 
 import java.util.concurrent.TimeUnit;
 
-public class SimleDaemon implements Runnable {
+public class SimpleDaemon implements Runnable {
+
     @Override
     public void run() {
-        while (true) {
+        while(true) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
                 System.out.println(Thread.currentThread() + " " + this);
@@ -15,23 +16,20 @@ public class SimleDaemon implements Runnable {
         }
     }
 
-    public static void main(String[] args)  {
-        long before = System.currentTimeMillis();
+    public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {
-            Thread daemon = new Thread(new SimleDaemon());
+            Thread daemon = new Thread(new SimpleDaemon());
             daemon.setDaemon(true);
             daemon.start();
         }
 
         System.out.println("All daemons is ran");
 
-        long total = System.currentTimeMillis() - before;
-        System.out.println("Time of 1st part: " + total);
-
         try {
-            TimeUnit.MILLISECONDS.sleep(175);
+            TimeUnit.MILLISECONDS.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
 }

@@ -4,27 +4,23 @@ import java.io.IOException;
 
 public class SimpleVolatile {
 
-    // один котелок
-    private static Boolean flag = true;
+    private static volatile boolean flag = true;
 
     public static void main(String[] args) {
         new ThreadFlagSetter().start();
         new ThreadFlagReader().start();
     }
 
-    // котелок - со своим флагом = тру
     public static class ThreadFlagReader extends Thread {
         @Override
         public void run() {
             System.err.println("waiting...");
-            while (SimpleVolatile.flag) {
-                System.out.println();
+            while (flag) {
             }
-            System.err.println("Gogogo...");
+            System.err.println("Gogogo....");
         }
     }
 
-    // котелок - со своим флагом = тру
     public static class ThreadFlagSetter extends Thread {
         @Override
         public void run() {
@@ -34,7 +30,8 @@ public class SimpleVolatile {
                 e.printStackTrace();
             }
             flag = false;
-            System.err.println("Flan now is down!");
+            System.err.println("Flag now is down");
         }
     }
+
 }

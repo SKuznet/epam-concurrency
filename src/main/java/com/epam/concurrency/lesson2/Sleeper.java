@@ -1,6 +1,7 @@
 package com.epam.concurrency.lesson2;
 
 public class Sleeper extends Thread {
+
     private int duration;
 
     @Override
@@ -8,7 +9,7 @@ public class Sleeper extends Thread {
         try {
             sleep(duration);
         } catch (InterruptedException e) {
-            System.err.println(getName() + " interrupted isInterrupted() " +  interrupted());
+            System.err.println(getName() + " interrupted isInterrupted " + interrupted());
             return;
         }
         System.out.println(getName() + " activated");
