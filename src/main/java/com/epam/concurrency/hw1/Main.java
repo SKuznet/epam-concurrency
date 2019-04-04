@@ -36,7 +36,6 @@ public class Main {
         Person Оля = new Person(account);
 
         CompletableFuture future = CompletableFuture.allOf(null);
-        future.get
 
         List<Person> people = new ArrayList<>();
         people.add(Маша);
