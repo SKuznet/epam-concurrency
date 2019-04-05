@@ -12,7 +12,7 @@ public class WaitNotifyExample {
                 for (int i = 0; i < 10; i++) {
                     System.err.println(i);
 
-                    if (i == 5) {
+                    if(i == 5) {
                         synchronized (object) {
                             object.notifyAll();
                         }
@@ -28,12 +28,6 @@ public class WaitNotifyExample {
 
         System.err.println("Starting...");
         thread.start();
-        /*try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }--finish отобразится после выполнения*/
-
         synchronized (object) {
             try {
                 object.wait();

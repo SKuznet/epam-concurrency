@@ -7,16 +7,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AtomicIntegerCheck implements Runnable {
-
     private AtomicInteger atomicInteger = new AtomicInteger(0);
 
     public int getValue() {
         return atomicInteger.get();
     }
 
-    public void evenIncrement() {
-        atomicInteger.addAndGet(2);
+    public void evenIncrement () {
+        atomicInteger.getAndAdd(2);
     }
+
 
     @Override
     public void run() {
@@ -32,7 +32,7 @@ public class AtomicIntegerCheck implements Runnable {
                 System.err.println("Aborting");
                 System.exit(0);
             }
-        }, 5000);
+        }, 50);
 
         ExecutorService executorService = Executors.newCachedThreadPool();
         AtomicIntegerCheck atomicIntegerCheck = new AtomicIntegerCheck();
@@ -41,10 +41,11 @@ public class AtomicIntegerCheck implements Runnable {
 
         while (true) {
             int val = atomicIntegerCheck.getValue();
-            if (val%2 != 0) {
-                System.err.println("broken with:" + val);
+            if(val % 2 != 0) {
+                System.err.println("broken with : " + val);
                 System.exit(0);
             }
         }
+
     }
 }

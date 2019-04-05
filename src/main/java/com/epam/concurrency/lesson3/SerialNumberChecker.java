@@ -32,7 +32,7 @@ public class SerialNumberChecker {
         }
         executorService.shutdown();
 
-        if(args.length > 0) {
+        if (args.length > 0) {
             try {
                 TimeUnit.MILLISECONDS.sleep(new Integer(args[0]));
                 System.out.println("No duplicates detected!");

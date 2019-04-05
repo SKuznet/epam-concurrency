@@ -8,20 +8,19 @@ public class InterruptedExample {
             @Override
             public void run() {
                 System.err.println(Thread.currentThread().isInterrupted());
-
-                for (int i = 0; i < 1000; i++) {
+                for (int i = 0; i < 10000000; i++) {
                     System.err.println(i);
                     try {
-                        TimeUnit.MILLISECONDS.sleep(100);
+                        TimeUnit.MILLISECONDS.sleep(1);
                     } catch (InterruptedException e) {
-                        System.err.println("Interrupted!");
-                        break;
+                        System.err.println("interrupted!");
+                       break;
                     }
                 }
             }
         });
 
-        System.err.println("Started..");
+        System.err.println("Started...");
         thread.start();
 
         try {
@@ -29,9 +28,8 @@ public class InterruptedExample {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        //don't use this
-        //thread.stop();
+        // never use it!!!
+        // thread.stop();
         thread.interrupt();
 
         try {

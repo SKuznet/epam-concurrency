@@ -19,12 +19,13 @@ public class CircularSet {
         index = ++index % len;
     }
 
-    public static synchronized boolean contains(int val) {
+    public synchronized boolean contains(int val) {
         for (int i = 0; i < len; i++) {
-            if (array[i] == val) {
+            if(array[i] == val) {
                 return true;
             }
         }
+
         return false;
     }
 }
