@@ -1,4 +1,4 @@
-package com.epam.concurrency.hw4;
+package com.epam.concurrency.hw5;
 
 import java.util.ArrayList;
 import java.util.List;
