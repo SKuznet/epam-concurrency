@@ -41,6 +41,7 @@ public class CyclicBarrierExample {
                }
            }
        });
+        Thread.currentThread().suspend();
 
         for (int i = 0; i < nHorses ; i++) {
             Horse horse = new Horse(cyclicBarrier);
