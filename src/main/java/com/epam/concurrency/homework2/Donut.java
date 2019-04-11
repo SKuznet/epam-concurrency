@@ -1,4 +1,4 @@
-package com.epam.concurrency.Homework2;
+package com.epam.concurrency.homework2;
 
 public class Donut {
 

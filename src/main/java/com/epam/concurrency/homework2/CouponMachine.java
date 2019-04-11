@@ -1,6 +1,4 @@
-package com.epam.concurrency.Homework2;
-
-import java.util.concurrent.Callable;
+package com.epam.concurrency.homework2;
 
 public class CouponMachine {
 
@@ -16,6 +14,5 @@ public class CouponMachine {
         Coupon coupon = new Coupon(couponNumber);
         donutMachine.createDonut(coupon);
         return coupon;
-
     }
 }

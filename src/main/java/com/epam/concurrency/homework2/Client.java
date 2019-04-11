@@ -1,8 +1,6 @@
-package com.epam.concurrency.Homework2;
+package com.epam.concurrency.homework2;
 
-import java.util.concurrent.TimeUnit;
-
-import static com.epam.concurrency.Homework2.CouponMachine.donutMachine;
+import static com.epam.concurrency.homework2.CouponMachine.donutMachine;
 
 public class Client implements Runnable {
 
@@ -20,7 +18,6 @@ public class Client implements Runnable {
         while (true) {
             try {
                 coupon = couponMachine.createCoupon();
-
                 System.err.println("client: " + clientId +
                         " get coupon: " + coupon.getNumber());
 
