@@ -1,31 +1,43 @@
 package com.epam.concurrency.homework2;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+
 import static com.epam.concurrency.homework2.CouponMachine.donutMachine;
 
-public class Client implements Runnable {
+public class Client implements Callable<Coupon> {
 
     private int clientId;
-    private CouponMachine couponMachine;
-    private Coupon coupon;
 
-    public Client(int clientId, CouponMachine couponMachine) {
-        this.couponMachine = couponMachine;
+    private static List<Integer> listOfHappyClient = new ArrayList<>();
+
+    public Client(int clientId) {
         this.clientId = clientId;
     }
 
     @Override
-    public void run() {
+    public Coupon call() throws InterruptedException {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
-                coupon = couponMachine.createCoupon();
+                Coupon coupon = CouponMachine.createCoupon();
                 System.err.println("client: " + clientId +
-                        " get coupon: " + coupon.getNumber());
-
+                        " receive coupon: " + coupon.getNumber());
                 Donut donut = donutMachine.getDonut(coupon);
-                System.err.println(("client: " + clientId +
-                        " get donut: " + donut.getDonutId()));
+                if (listOfHappyClient.contains(clientId)) {
+                    System.err.println("Client " + clientId + " have Already received donut");
+                    System.exit(1);
+                } else {
+                    listOfHappyClient.add(clientId);
+                    System.err.println(("client: " + clientId +
+                            " receive donut: " + donut.getDonutId()));
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        System.err.println("got interrupted");
+        throw new InterruptedException("Were interrupted");
     }
 }
 
