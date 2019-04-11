@@ -49,7 +49,7 @@ public class Main {
         thread.join();
         executorService.shutdown();
 
-        System.err.println("finished");
+        System.err.println(Main.class.getCanonicalName());
     }
 
 }
