@@ -1,7 +1,5 @@
 package com.epam.concurrency.lesson7;
 
-import java.util.Objects;
-
 public class Cat {
     private String name;
 

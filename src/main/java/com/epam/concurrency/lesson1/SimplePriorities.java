@@ -8,26 +8,6 @@ public class SimplePriorities implements Runnable {
     private volatile double d;
     private int priority;
 
-    @Override
-    public void run() {
-        Thread.currentThread().setPriority(priority);
-        while (true) {
-            // high load
-            for (int i = 0; i < 100000; i++) {
-                d+= (Math.PI + Math.E) / (double) i;
-                if (i % 1000 == 0) {
-                    Thread.yield();
-                }
-            }
-
-            System.out.println(this);
-
-            if (--countDown == 0) {
-                return;
-            }
-        }
-    }
-
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -41,6 +21,26 @@ public class SimplePriorities implements Runnable {
         simplePriorities.setPriority(Thread.MAX_PRIORITY);
         executorService.execute(simplePriorities);
         executorService.shutdown();
+    }
+
+    @Override
+    public void run() {
+        Thread.currentThread().setPriority(priority);
+        while (true) {
+            // high load
+            for (int i = 0; i < 100000; i++) {
+                d += (Math.PI + Math.E) / (double) i;
+                if (i % 1000 == 0) {
+                    Thread.yield();
+                }
+            }
+
+            System.out.println(this);
+
+            if (--countDown == 0) {
+                return;
+            }
+        }
     }
 
     @Override

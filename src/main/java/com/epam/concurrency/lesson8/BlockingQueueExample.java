@@ -6,10 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 public class BlockingQueueExample {
 
-    public static void main(String[] args) {
-        new BlockingQueueExample();
-    }
-
     private final String[] messages = {
             "You preparing to competency center!",
             "You passed competency!",
@@ -17,11 +13,14 @@ public class BlockingQueueExample {
             "What next???"
     };
     private BlockingQueue<String> drop;
-
     public BlockingQueueExample() {
         drop = new ArrayBlockingQueue<>(1, true);
         new Thread(new Producer()).start();
         new Thread(new Consumer()).start();
+    }
+
+    public static void main(String[] args) {
+        new BlockingQueueExample();
     }
 
     class Producer implements Runnable {

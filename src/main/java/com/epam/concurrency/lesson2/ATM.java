@@ -14,7 +14,7 @@ public class ATM {
             }
             money -= amount;
             System.err.println("ALL OK! New balance: " + money);
-        }else {
+        } else {
             System.err.println("Not enough money");
         }
 

@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PhilosopherTaskExample {
     public static void main(String[] args) {
-        Semaphore semaphore = new Semaphore(1);
+        Semaphore semaphore = new Semaphore(2);
 
         for (int i = 1; i < 6; i++) {
             new Philosopher(semaphore, i).start();

@@ -27,9 +27,9 @@ class MakerString implements Runnable {
         // fill buffer
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 5; j++) {
-                string+= (char) ch++;
+                string += (char) ch++;
             }
-            try{
+            try {
                 string = exchanger.exchange(string);
             } catch (InterruptedException e) {
                 System.err.println(e.getMessage());

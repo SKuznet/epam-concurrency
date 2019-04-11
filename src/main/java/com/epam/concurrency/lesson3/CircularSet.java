@@ -21,7 +21,7 @@ public class CircularSet {
 
     public synchronized boolean contains(int val) {
         for (int i = 0; i < len; i++) {
-            if(array[i] == val) {
+            if (array[i] == val) {
                 return true;
             }
         }

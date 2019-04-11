@@ -9,23 +9,6 @@ public class SerialNumberChecker {
     private static CircularSet serials = new CircularSet(1000);
     private static ExecutorService executorService = Executors.newCachedThreadPool();
 
-    static class SerialChecker implements Runnable {
-
-        @Override
-        public void run() {
-            while (true) {
-                int serial = SerialNumberGenerator.nextSerialNumber();
-
-                if (serials.contains(serial)) {
-                    System.err.println("Duplicates: " + serial);
-                    System.exit(0);
-                }
-
-                serials.add(serial);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         for (int i = 0; i < SIZE; i++) {
             executorService.execute(new SerialChecker());
@@ -39,6 +22,23 @@ public class SerialNumberChecker {
                 System.exit(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    static class SerialChecker implements Runnable {
+
+        @Override
+        public void run() {
+            while (true) {
+                int serial = SerialNumberGenerator.nextSerialNumber();
+
+                if (serials.contains(serial)) {
+                    System.err.println("Duplicates: " + serial);
+                    System.exit(0);
+                }
+
+                serials.add(serial);
             }
         }
     }

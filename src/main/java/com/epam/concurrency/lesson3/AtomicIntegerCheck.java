@@ -9,22 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AtomicIntegerCheck implements Runnable {
     private AtomicInteger atomicInteger = new AtomicInteger(0);
 
-    public int getValue() {
-        return atomicInteger.get();
-    }
-
-    public void evenIncrement () {
-        atomicInteger.getAndAdd(2);
-    }
-
-
-    @Override
-    public void run() {
-        while (true) {
-            evenIncrement();
-        }
-    }
-
     public static void main(String[] args) {
         new Timer().schedule(new TimerTask() {
             @Override
@@ -41,11 +25,26 @@ public class AtomicIntegerCheck implements Runnable {
 
         while (true) {
             int val = atomicIntegerCheck.getValue();
-            if(val % 2 != 0) {
+            if (val % 2 != 0) {
                 System.err.println("broken with : " + val);
                 System.exit(0);
             }
         }
 
+    }
+
+    public int getValue() {
+        return atomicInteger.get();
+    }
+
+    public void evenIncrement() {
+        atomicInteger.getAndAdd(2);
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            evenIncrement();
+        }
     }
 }

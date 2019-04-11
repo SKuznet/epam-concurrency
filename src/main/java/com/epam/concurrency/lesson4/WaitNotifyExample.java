@@ -12,7 +12,7 @@ public class WaitNotifyExample {
                 for (int i = 0; i < 10; i++) {
                     System.err.println(i);
 
-                    if(i == 5) {
+                    if (i == 5) {
                         synchronized (object) {
                             object.notifyAll();
                         }

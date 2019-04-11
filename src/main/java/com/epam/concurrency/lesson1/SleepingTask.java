@@ -5,6 +5,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class SleepingTask extends SpellCast {
+    public static void main(String[] args) {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        for (int i = 0; i < 5; i++) {
+            executorService.execute(new SleepingTask());
+        }
+        executorService.shutdown();
+    }
+
     @Override
     public void run() {
         try {
@@ -18,13 +26,5 @@ public class SleepingTask extends SpellCast {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        for (int i = 0; i <  5; i++) {
-            executorService.execute(new SleepingTask());
-        }
-        executorService.shutdown();
     }
 }

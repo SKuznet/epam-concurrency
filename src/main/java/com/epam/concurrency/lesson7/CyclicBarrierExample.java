@@ -12,38 +12,38 @@ public class CyclicBarrierExample {
     private CyclicBarrier cyclicBarrier;
 
     public CyclicBarrierExample(int nHorses, int pause) {
-       cyclicBarrier = new CyclicBarrier(nHorses, new Runnable() {
-           @Override
-           public void run() {
-               StringBuilder stringBuilder = new StringBuilder();
+        cyclicBarrier = new CyclicBarrier(nHorses, new Runnable() {
+            @Override
+            public void run() {
+                StringBuilder stringBuilder = new StringBuilder();
 
-               for (int i = 0; i < FINISH_LINE; i++) {
-                   stringBuilder.append("=");
-               }
-               System.out.println(stringBuilder);
+                for (int i = 0; i < FINISH_LINE; i++) {
+                    stringBuilder.append("=");
+                }
+                System.out.println(stringBuilder);
 
-               for (Horse horse: horses) {
-                   System.out.println(horse.tracks());
-               }
+                for (Horse horse : horses) {
+                    System.out.println(horse.tracks());
+                }
 
-               for (Horse horse: horses) {
-                   if(horse.getStrides() >= FINISH_LINE) {
-                       System.out.println(horse + "won!");
-                       executorService.shutdownNow();
-                       return;
-                   }
-               }
+                for (Horse horse : horses) {
+                    if (horse.getStrides() >= FINISH_LINE) {
+                        System.out.println(horse + "won!");
+                        executorService.shutdownNow();
+                        return;
+                    }
+                }
 
-               try {
-                   TimeUnit.MILLISECONDS.sleep(pause);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
-           }
-       });
+                try {
+                    TimeUnit.MILLISECONDS.sleep(pause);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         Thread.currentThread().suspend();
 
-        for (int i = 0; i < nHorses ; i++) {
+        for (int i = 0; i < nHorses; i++) {
             Horse horse = new Horse(cyclicBarrier);
             horses.add(horse);
             executorService.execute(horse);
