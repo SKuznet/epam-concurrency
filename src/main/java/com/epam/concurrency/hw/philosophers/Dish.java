@@ -11,7 +11,7 @@ public class Dish {
             semaphore.acquire();
             System.err.println("Philosopher from thread " + Thread.currentThread().getName() + " is eating" +
                     " his " + dishNumber + " dish");
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(700);
             System.err.println("Philosopher from thread " + Thread.currentThread().getName() + " finished eating" +
                     " his " + dishNumber + " dish");
             System.err.println("    semaphore.getQueueLength()" + semaphore.getQueueLength());

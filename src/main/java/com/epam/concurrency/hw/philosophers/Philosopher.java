@@ -6,6 +6,6 @@ public class Philosopher implements Runnable {
         for (int i = 1; i <= 5; ++i) {
             Dish.eat(i);
         }
-        System.out.println(Thread.currentThread().getName() + " finished");
+        System.err.println(Thread.currentThread().getName() + " finished");
     }
 }
