@@ -14,7 +14,7 @@ public class AtomicIntegerCheck implements Runnable {
     }
 
     public void evenIncrement () {
-        atomicInteger.addAndGet(2);
+        atomicInteger.getAndAdd(2);
     }
 
 
@@ -32,7 +32,7 @@ public class AtomicIntegerCheck implements Runnable {
                 System.err.println("Aborting");
                 System.exit(0);
             }
-        }, 500);
+        }, 50);
 
         ExecutorService executorService = Executors.newCachedThreadPool();
         AtomicIntegerCheck atomicIntegerCheck = new AtomicIntegerCheck();
