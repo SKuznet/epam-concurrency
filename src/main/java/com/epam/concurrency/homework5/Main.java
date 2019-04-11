@@ -1,4 +1,4 @@
-package com.epam.concurrency.Homework4;
+package com.epam.concurrency.homework5;
 
 public class Main {
     public static void main(String[] args) {

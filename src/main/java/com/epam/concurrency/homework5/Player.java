@@ -1,4 +1,4 @@
-package com.epam.concurrency.Homework4;
+package com.epam.concurrency.homework5;
 
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
