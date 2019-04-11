@@ -1,4 +1,4 @@
-package com.epam.concurrency.Homework1;
+package com.epam.concurrency.homework1;
 
 public class NotEnoughMoneyException extends Exception{
 

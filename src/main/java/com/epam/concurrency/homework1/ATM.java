@@ -1,9 +1,8 @@
-package com.epam.concurrency.Homework1;
+package com.epam.concurrency.homework1;
 
 import java.math.BigDecimal;
-import java.util.concurrent.TimeUnit;
 
-public class ATM implements Runnable {
+public class ATM {
     private static BigDecimal moneyAtATM = BigDecimal.valueOf(1000);
     private int atmNumber;
 
@@ -11,7 +10,7 @@ public class ATM implements Runnable {
         this.atmNumber = atmNumber;
     }
 
-    public synchronized String getMoney(BigDecimal amount, BankAccount bankAccount) throws InterruptedException {
+    public synchronized String getMoney(BigDecimal amount, BankAccount bankAccount) {
 
         if (moneyAtATM.compareTo(amount) > 0) {
             try {
@@ -24,13 +23,5 @@ public class ATM implements Runnable {
         } else {
             return ("Not enough money in this ATM: " + this.atmNumber);
         }
-    }
-
-    public String addMoney(BigDecimal amount, BankAccount bankAccount) {
-        return bankAccount.addMoney(amount);
-    }
-
-    @Override
-    public void run() {
     }
 }

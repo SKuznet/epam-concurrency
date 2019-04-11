@@ -1,20 +1,20 @@
-package com.epam.concurrency.Homework1;
+package com.epam.concurrency.homework1;
 
 import java.math.BigDecimal;
 
 public class BankAccount {
 
-    public synchronized BigDecimal getAccountMoney() {
-        return accountMoney;
-    }
-
     private BigDecimal accountMoney;
 
     private int number;
 
-    public synchronized String addMoney(BigDecimal amount) {
-        accountMoney = accountMoney.add(amount);
-        return "New Balance is: " + accountMoney;
+    public synchronized BigDecimal getAccountMoney() {
+        return accountMoney;
+    }
+
+    public BankAccount(BigDecimal accountMoney, int number) {
+        this.accountMoney = accountMoney;
+        this.number = number;
     }
 
     public synchronized String subtractMoney(BigDecimal amount) throws NotEnoughMoneyException {
@@ -22,7 +22,7 @@ public class BankAccount {
             accountMoney = accountMoney.subtract(amount);
             return "New balance is: " + accountMoney;
         } else {
-            throw new NotEnoughMoneyException("Not enough money");
+            throw new NotEnoughMoneyException("Not enough money ");
         }
     }
 
@@ -32,10 +32,5 @@ public class BankAccount {
         } else {
             return false;
         }
-    }
-
-    public BankAccount(BigDecimal accountMoney, int number) {
-        this.accountMoney = accountMoney;
-        this.number = number;
     }
 }
