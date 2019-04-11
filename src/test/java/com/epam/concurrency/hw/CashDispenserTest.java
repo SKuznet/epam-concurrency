@@ -1,10 +1,7 @@
 package com.epam.concurrency.hw;
 
 
-import com.epam.concurrency.hw.ATM.CashDispenser;
-import com.epam.concurrency.hw.ATM.Deposit;
-import com.epam.concurrency.hw.ATM.DepositATM;
-import com.epam.concurrency.hw.ATM.Dispenser;
+import com.epam.concurrency.hw.ATM.*;
 import org.junit.Test;
 
 import java.util.ArrayList;

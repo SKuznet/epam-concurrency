@@ -1,4 +1,4 @@
-package com.epam.concurrency.hw;
+package com.epam.concurrency.hw.ATM;
 
 public class BankAccount {
     private Integer accountId;

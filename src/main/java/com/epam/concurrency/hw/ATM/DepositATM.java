@@ -1,7 +1,5 @@
 package com.epam.concurrency.hw.ATM;
 
-import com.epam.concurrency.hw.BankAccount;
-
 import java.util.List;
 
 public class DepositATM extends AbstractATM implements Deposit {

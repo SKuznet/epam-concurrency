@@ -1,7 +1,5 @@
 package com.epam.concurrency.hw.ATM;
 
-import com.epam.concurrency.hw.BankAccount;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
