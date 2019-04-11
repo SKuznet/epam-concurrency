@@ -15,7 +15,6 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
             try {
                 coupon = couponMachine.createCoupon();
                 System.err.println("client: " + clientId +
@@ -24,13 +23,9 @@ public class Client implements Runnable {
                 Donut donut = donutMachine.getDonut(coupon);
                 System.err.println(("client: " + clientId +
                         " get donut: " + donut.getDonutId()));
-                if (coupon.getNumber() > 20) {
-                    break;
-                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
     }
 }
 
