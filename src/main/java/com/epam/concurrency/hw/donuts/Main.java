@@ -1,6 +1,4 @@
-package com.epam.concurrency.hw.ATM.donuts;
-
-import com.epam.concurrency.lesson1.FixedTreadPool;
+package com.epam.concurrency.hw.donuts;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

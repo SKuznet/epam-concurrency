@@ -1,4 +1,4 @@
-package com.epam.concurrency.hw.ATM.donuts;
+package com.epam.concurrency.hw.donuts;
 
 import java.util.HashSet;
 import java.util.Optional;
