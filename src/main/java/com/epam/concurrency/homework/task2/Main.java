@@ -18,11 +18,11 @@ public class Main {
             @Override
             public void run() {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(5000);
+                    TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.err.println("Turn off the machine");
+                System.err.println("5 seconds left");
                 System.exit(0);
         }
         });
