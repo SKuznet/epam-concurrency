@@ -14,11 +14,11 @@ public class ReportExporter implements Runnable {
     private Path path;
     private Report report;
     private int linesInFile;
-    private AtomicInteger counter = new AtomicInteger(1);
+    private AtomicInteger counter = Sequence.counter;
 
-    public ReportExporter(Path path, Report report, int linesInFile) {
+    public ReportExporter(Path path, int linesInFile) {
         this.path = path;
-        this.report = report;
+        this.report = new ReportGenerator().createReport();;
         this.linesInFile = linesInFile;
     }
 
