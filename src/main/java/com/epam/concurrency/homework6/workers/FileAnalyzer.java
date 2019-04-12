@@ -13,7 +13,6 @@ import java.util.concurrent.CyclicBarrier;
 @SuppressWarnings("all")
 public class FileAnalyzer implements Runnable {
     private static final BlockingQueue<String> fileNamesQueue = DataHolder.getFileNamesQueue();
-    private static boolean passedTempPhase;
 
     private final CyclicBarrier cyclicBarrier;
     private final ConcurrentHashMap<String, Map<String, List<Integer>>> readData;
@@ -36,13 +35,9 @@ public class FileAnalyzer implements Runnable {
     @Override
     public void run() {
         try {
-            if (!passedTempPhase) {
-                readFile();
-                writeFile();
-                cyclicBarrier.await();
-            } else {
-
-            }
+            readFile();
+            writeFile();
+            cyclicBarrier.await();
         } catch (IOException | InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }
@@ -108,9 +103,5 @@ public class FileAnalyzer implements Runnable {
             }
         }
         inputFile.delete();
-    }
-
-    public static void setPassedTempPhase(boolean passedTempPhase) {
-        FileAnalyzer.passedTempPhase = passedTempPhase;
     }
 }

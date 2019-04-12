@@ -14,9 +14,9 @@ public class DataHolder {
 
     static {
         employees = Collections.unmodifiableList(Arrays.asList(
-                new Employee("CHAOS LORD"),
-                new Employee("mygodits2am"),
-                new Employee("java rules"),
+                new Employee("anonymous"),
+                new Employee("mygoshits8am"),
+                new Employee("daenerys gonna die folks"),
                 new Employee("whereami"),
                 new Employee("sudo -su makesandwich")));
         urls = Collections.unmodifiableList(Arrays.asList(
