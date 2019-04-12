@@ -11,7 +11,7 @@ public class Main {
         Dispenser dispenser = new Dispenser();
         ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             executorService.execute(dispenser);
         }
         executorService.execute(new Runnable() {
