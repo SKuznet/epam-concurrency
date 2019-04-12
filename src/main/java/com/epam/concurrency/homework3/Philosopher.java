@@ -1,4 +1,4 @@
-package com.epam.concurrency.homework3.task1;
+package com.epam.concurrency.homework3;
 
 import java.util.Random;
 import java.util.concurrent.Semaphore;

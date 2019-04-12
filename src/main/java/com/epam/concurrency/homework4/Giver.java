@@ -1,4 +1,4 @@
-package com.epam.concurrency.homework3.task2;
+package com.epam.concurrency.homework4;
 
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.TimeUnit;
