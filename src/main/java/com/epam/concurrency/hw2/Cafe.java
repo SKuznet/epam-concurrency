@@ -33,5 +33,6 @@ public class Cafe {
             System.err.println("You are late");
             System.exit(1);
         });
+        executorService.shutdown();
     }
 }
